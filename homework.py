@@ -1,3 +1,4 @@
+from typing import Dict, Type
 from dataclasses import dataclass
 
 
@@ -54,7 +55,9 @@ class Training:
 
     def get_spent_calories(self) -> float:
         """Получить количество затраченных калорий."""
-        pass
+        raise NotImplementedError(
+            'Определите spent_calories в %s.' % type(self).__name__
+        )
 
     def show_training_info(self) -> InfoMessage:
         """Вернуть информационное сообщение о выполненной тренировке."""
@@ -140,7 +143,7 @@ class Swimming(Training):
                 * self.count_pool / self.M_IN_KM / self.duration)
 
 
-TRAINING_TYPE: dict[str, type[Training]] = {'SWM': Swimming,
+TRAINING_TYPE: Dict[str, Type[Training]] = {'SWM': Swimming,
                                             'RUN': Running,
                                             'WLK': SportsWalking
                                             }
